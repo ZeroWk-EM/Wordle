@@ -1,6 +1,6 @@
 ﻿namespace Wordle_Library
 {
-    public class Class1
+    public class Logic
     {
 
     }

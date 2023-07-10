@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Wordle_Library
+﻿namespace Wordle_Library
 {
     public class Logic
     {

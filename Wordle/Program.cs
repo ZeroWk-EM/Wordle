@@ -13,13 +13,13 @@ internal class Program
         }
     }
 
-    public static void PrintGrid(int wordLength)
+    public static void PrintGameGrid(string[,] matrix, int wordLength)
     {
         for (int i = 0; i < Logic.MaxTurn; i++)
         {
             for (int j = 0; j < wordLength; j++)
             {
-                Console.Write("[]");
+                Console.Write($"[{matrix[i, j]}]");
             }
             Console.WriteLine();
         }
@@ -33,18 +33,8 @@ internal class Program
         {
             List<string> wordlist = File.ReadAllLines(FilePath).ToList();
             Logic game = new(wordlist);
-            // Choose Winner Word
             string winnerWord = game.ChooseRandomWord();
-            Console.WriteLine($"DEBUG - PAROLA VINCENTE ==> [{winnerWord}]");
-            while (turn > 0)
-            {
-                PrintGrid(winnerWord.Length);
-                Console.ReadKey();
-                turn--;
-            }
-            Console.WriteLine("You Lose!");
-            Console.WriteLine($"The correct answer was [{winnerWord}]");
-            Console.ReadKey();
+            string[,] matrix = game.CreateGameMatrix();
         }
         catch (FileNotFoundException)
         {

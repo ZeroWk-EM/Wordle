@@ -42,17 +42,13 @@ internal class Program
             {
                 Console.Write("Insert phrase: ");
                 string? toSend = Console.ReadLine();
-                if (toSend?.Length > game.WordLength)
-                {
-                    Console.WriteLine("Parola troppo lunga");
-                }
-                else if (toSend != null)
+                if (toSend != null && toSend.Length == game.WordLength)
                 {
                     game.InserIntoMatrix(attempt, toSend, matrix);
                 }
                 else
                 {
-                    Console.WriteLine("To send il null");
+                    Console.WriteLine("Length ERROR");
                 }
 
                 turn--;
@@ -74,5 +70,5 @@ internal class Program
             Console.WriteLine("Finish");
         }
 
-     }
+    }
 }

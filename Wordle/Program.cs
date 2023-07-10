@@ -42,8 +42,19 @@ internal class Program
             {
                 Console.Write("Insert phrase: ");
                 string? toSend = Console.ReadLine();
+                if (toSend != null)
+                {
+                    Console.WriteLine($"BEFORE [{toSend}] LEN [{toSend.Length}]");
+                    // Remove space start/end, put all in lowercase and remove space beetwen word
+                    toSend = toSend.Trim().ToLower().Replace(" ", "");
+                    Console.WriteLine($"AFTER [{toSend}] LEN [{toSend.Length}]");
+                }
+
                 if (toSend != null && toSend.Length == game.WordLength)
                 {
+                    Console.WriteLine($"BEFORE [{toSend}] LEN [{toSend.Length}]");
+                    toSend = toSend.Trim().ToLower();
+                    Console.WriteLine($"AFTER [{toSend}] LEN [{toSend.Length}]");
                     game.InserIntoMatrix(attempt, toSend, matrix);
                     turn--;
                     attempt++;

@@ -13,7 +13,7 @@ internal class Program
         }
     }
 
-    public static void PrintGameGrid(string[,] matrix, int wordLength)
+    public static void PrintGameGrid(char[,] matrix, int wordLength)
     {
         for (int i = 0; i < Logic.MaxTurn; i++)
         {
@@ -34,7 +34,31 @@ internal class Program
             List<string> wordlist = File.ReadAllLines(FilePath).ToList();
             Logic game = new(wordlist);
             string winnerWord = game.ChooseRandomWord();
-            string[,] matrix = game.CreateGameMatrix();
+            char[,] matrix = game.CreateGameMatrix();
+            int attempt = 0;
+            Console.WriteLine($"DEBUG - CORRECT WORD [{winnerWord}]");
+            Console.WriteLine($"Word have [{game.WordLength}] letter");
+            while (turn > 0)
+            {
+                Console.Write("Insert phrase: ");
+                string? toSend = Console.ReadLine();
+                if (toSend?.Length > game.WordLength)
+                {
+                    Console.WriteLine("Parola troppo lunga");
+                }
+                else if (toSend != null)
+                {
+                    game.InserIntoMatrix(attempt, toSend, matrix);
+                }
+                else
+                {
+                    Console.WriteLine("To send il null");
+                }
+
+                turn--;
+                attempt++;
+                PrintGameGrid(matrix, winnerWord.Length);
+            };
         }
         catch (FileNotFoundException)
         {
@@ -50,5 +74,5 @@ internal class Program
             Console.WriteLine("Finish");
         }
 
-    }
+     }
 }

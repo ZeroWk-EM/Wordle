@@ -4,7 +4,7 @@ namespace Wordle_Library
 {
     public class Logic
     {
-        private readonly List<string> _listword = new List<string>();
+        private readonly List<string> _listword = new();
         private int _wordLength = 0;
         private string _word = "";
         public const int MaxTurn = 6;
@@ -16,7 +16,7 @@ namespace Wordle_Library
 
         public List<string> Listword { get { return _listword; } }
 
-        private int WordLength
+        public int WordLength
         {
             get { return _wordLength; }
             set { _wordLength = value; }
@@ -40,17 +40,19 @@ namespace Wordle_Library
             return Word;
         }
 
-        public string[,] CreateGameMatrix()
+        public char[,] CreateGameMatrix()
         {
             if (WordLength < 2)
             {
                 throw new Exception("Use the ChooseRandomWord() function first to set Matrix length");
             }
-
-            string[,] gameMatrix = new string[MaxTurn, WordLength];
-            return gameMatrix;
+            char[,] matrix = new char[MaxTurn, WordLength];
+            return matrix;
         }
 
-   
+        public void InserIntoMatrix(int attempt, string recive, char[,] matrix)
+        {
+
+        }
     }
 }

@@ -16,11 +16,21 @@ internal class Program
     static public void Main()
     {
         const string FilePath = @"C:\Users\EmanueleMoncada\Desktop\fakedb\wordTable.txt";
+        int turn = Logic.MaxTurn;
         try
         {
             List<string> wordlist = File.ReadAllLines(FilePath).ToList();
             Logic game = new(wordlist);
-            PrintList(wordlist);
+            // Choose Winner Word
+            string winnerWord = game.ChooseRandomWord();
+            Console.WriteLine($"DEBUG - PAROLA VINCENTE ==> [{winnerWord}]");
+            while (turn > 0)
+            {
+                turn--;
+            }
+            Console.WriteLine("You Lose!");
+            Console.WriteLine($"The correct answer was [{winnerWord}]");
+            Console.ReadKey();
         }
         catch (FileNotFoundException)
         {

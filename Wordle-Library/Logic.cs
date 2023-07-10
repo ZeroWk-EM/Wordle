@@ -47,6 +47,16 @@ namespace Wordle_Library
                 throw new Exception("Use the ChooseRandomWord() function first to set Matrix length");
             }
             char[,] matrix = new char[MaxTurn, WordLength];
+
+            // Initialize matrix
+
+            for (int i = 0; i < Logic.MaxTurn; i++)
+            {
+                for (int j = 0; j < WordLength; j++)
+                {
+                    matrix[i, j] = '_';
+                }
+            }
             return matrix;
         }
 

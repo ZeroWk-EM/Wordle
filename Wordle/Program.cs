@@ -51,7 +51,12 @@ internal class Program
                 }
                 else
                 {
-                    Console.WriteLine("Length ERROR");
+                    if (toSend != null)
+                    {
+                        Console.Write($"Length Error - The word entered is too ");
+                        Console.WriteLine(toSend.Length > winnerWord.Length ? "Long" : "Short");
+                    }
+
                 }
             };
         }

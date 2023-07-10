@@ -45,15 +45,14 @@ internal class Program
                 if (toSend != null && toSend.Length == game.WordLength)
                 {
                     game.InserIntoMatrix(attempt, toSend, matrix);
+                    turn--;
+                    attempt++;
+                    PrintGameGrid(matrix, winnerWord.Length);
                 }
                 else
                 {
                     Console.WriteLine("Length ERROR");
                 }
-
-                turn--;
-                attempt++;
-                PrintGameGrid(matrix, winnerWord.Length);
             };
         }
         catch (FileNotFoundException)

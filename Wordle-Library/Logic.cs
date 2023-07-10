@@ -52,7 +52,12 @@ namespace Wordle_Library
 
         public void InserIntoMatrix(int attempt, string recive, char[,] matrix)
         {
+            char[] recivetochar = recive.ToCharArray();
 
+            for (int i = 0; i < WordLength; i++)
+            {
+                matrix[attempt, i] = recivetochar[i];
+            }
         }
     }
 }

@@ -11,6 +11,7 @@
 
         public List<string> Listword { get { return _listword; } }
 
+        // FUNCTION TO CHOOSE RANDOM WORD
         public string ChooseRandomWord()
         {
             Random roulette = new Random();

@@ -4,12 +4,24 @@ namespace Tic_Tac_Toe;
 
 internal class Program
 {
-
+    // DEGUB FUNCTION TO PRINT ALL LIST
     public static void PrintList(List<string> listToPrint)
     {
         foreach (string word in listToPrint)
         {
             Console.WriteLine(word);
+        }
+    }
+
+    public static void PrintGrid(int wordLength)
+    {
+        for (int i = 0; i < Logic.MaxTurn; i++)
+        {
+            for (int j = 0; j < wordLength; j++)
+            {
+                Console.Write("[]");
+            }
+            Console.WriteLine();
         }
     }
 
@@ -26,6 +38,8 @@ internal class Program
             Console.WriteLine($"DEBUG - PAROLA VINCENTE ==> [{winnerWord}]");
             while (turn > 0)
             {
+                PrintGrid(winnerWord.Length);
+                Console.ReadKey();
                 turn--;
             }
             Console.WriteLine("You Lose!");

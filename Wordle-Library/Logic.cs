@@ -7,22 +7,28 @@
         private string _word = "";
         public const int MaxTurn = 6;
         public const char InitilizedMatrixSymbol = '_';
+        readonly List<char> existValue = new();
 
         public Logic(List<string> word)
         {
             this._listword = word;
         }
         public List<string> Listword { get { return _listword; } }
+
         public int WordLength
         {
             get { return _wordLength; }
             set { _wordLength = value; }
         }
+
         private string Word
         {
             get { return _word; }
             set { _word = value; }
         }
+
+        public List<char> ExistValue { get { return existValue; } }
+
         public string ChooseRandomWord()
         {
             Random roulette = new();
@@ -54,12 +60,18 @@
         public void InserIntoMatrix(int attempt, string recive, char[,] matrix)
         {
             char[] recivetochar = recive.ToCharArray();
+            existValue.Clear();
 
             for (int i = 0; i < WordLength; i++)
             {
                 if (recive[i] == Word[i])
                 {
                     matrix[attempt, i] = Char.ToUpper(recivetochar[i]);
+                }
+                else if (Word.Contains(recivetochar[i]))
+                {
+                    matrix[attempt, i] = recivetochar[i];
+                    existValue.Add(recivetochar[i]);
                 }
                 else
                 {

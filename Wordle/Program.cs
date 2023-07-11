@@ -15,6 +15,7 @@ namespace Wordle
 
         public static void PrintGameGrid(char[,] matrix, int wordLength)
         {
+            Console.WriteLine("\x1b[1m\u001b[1;32mWO\u001b[1;31mRD\u001b[1;33mLE\u001b[1;0m\n");
             for (int i = 0; i < Logic.MaxTurn; i++)
             {
                 for (int j = 0; j < wordLength; j++)
@@ -35,6 +36,7 @@ namespace Wordle
 
         static public void Main()
         {
+            Console.Title = "Wordle Game";
             const string FilePath = @"C:\Users\EmanueleMoncada\Desktop\fakedb\wordTable.txt";
             int turn = Logic.MaxTurn;
             string winnerWord = "";
@@ -42,12 +44,17 @@ namespace Wordle
             try
             {
                 List<string> wordlist = File.ReadAllLines(FilePath).ToList();
+                if (wordlist.Count == 0)
+                {
+                    Console.WriteLine("\u001b[1;31mError - The Collection is empty\x1b[1;0m");
+                    Environment.Exit(1);
+                }
                 Logic game = new(wordlist);
                 winnerWord = game.ChooseRandomWord();
                 char[,] matrix = game.CreateGameMatrix();
                 int attempt = 0;
                 Console.WriteLine($"DEBUG - CORRECT WORD [{winnerWord}]");
-                Console.WriteLine($"Word have [{game.WordLength}] letter");
+                Console.WriteLine($"\nWord have [{game.WordLength}] letter");
                 while (turn > 0)
                 {
                     Console.Write("Insert phrase: ");
@@ -67,7 +74,7 @@ namespace Wordle
                         // TODO: FIX THE BUG
                         if (game.ExistValue.Count > 0)
                         {
-                            Console.Write("Value ");
+                            Console.Write("\nValue ");
                             foreach (char sentence in game.ExistValue)
                             {
                                 Console.Write($"[\u001b[1;33m{sentence.ToString().ToUpper()}\u001b[1;0m]");
@@ -82,19 +89,15 @@ namespace Wordle
                         }
                         else if (!game.IsWinner(toSend) && turn > 0)
                         {
-                            Console.WriteLine($"Word have [{game.WordLength}] letter");
-                        }
-                        else
-                        {
-                            Console.WriteLine("End");
+                            Console.WriteLine($"\nWord have [{game.WordLength}] letter");
                         }
                     }
                     else
                     {
                         if (toSend != null)
                         {
-                            Console.Write($"Length Error - The word entered is too ");
-                            Console.WriteLine(toSend.Length > winnerWord.Length ? "Long" : "Short");
+                            Console.Write($"\u001b[1;31mLength Error - The word entered is too ");
+                            Console.WriteLine(toSend.Length > winnerWord.Length ? "Long\u001b[1;0m" : "Short\u001b[1;0m");
                         }
 
                     }
@@ -108,7 +111,7 @@ namespace Wordle
             {
                 Console.WriteLine(e.Message);
             }
-            Console.WriteLine(winning ? "You Win" : $"I'm sorry but you lose!\nCorrect word is [{winnerWord}]");
+            Console.WriteLine(winning ? "\n\u001b[1;32mYou Win\u001b[1;0m" : $"\n\u001b[1;31mI'm sorry but you lose!\nCorrect word is \u001b[1;0m\u001b[1;96m{winnerWord}\u001b[1;0m");
         }
     }
 }

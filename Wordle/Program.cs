@@ -4,7 +4,7 @@ namespace Tic_Tac_Toe;
 
 internal class Program
 {
-    // DEGUB FUNCTION TO PRINT ALL LIST
+ 
     public static void PrintList(List<string> listToPrint)
     {
         foreach (string word in listToPrint)
@@ -38,11 +38,12 @@ internal class Program
     {
         const string FilePath = @"C:\Users\EmanueleMoncada\Desktop\fakedb\wordTable.txt";
         int turn = Logic.MaxTurn;
+        string winnerWord = "";
         try
         {
             List<string> wordlist = File.ReadAllLines(FilePath).ToList();
             Logic game = new(wordlist);
-            string winnerWord = game.ChooseRandomWord();
+            winnerWord = game.ChooseRandomWord();
             char[,] matrix = game.CreateGameMatrix();
             int attempt = 0;
             Console.WriteLine($"DEBUG - CORRECT WORD [{winnerWord}]");
@@ -58,11 +59,12 @@ internal class Program
 
                 if (toSend != null && toSend.Length == game.WordLength)
                 {
-                    Console.Clear();
                     game.InserIntoMatrix(attempt, toSend, matrix);
                     turn--;
                     attempt++;
+                    Console.Clear();
                     PrintGameGrid(matrix, winnerWord.Length);
+                    Console.WriteLine($"Word have [{game.WordLength}] letter");
                 }
                 else
                 {
@@ -81,12 +83,12 @@ internal class Program
         }
         catch (Exception e)
         {
-            //Catch other Exception
             Console.WriteLine(e.Message);
         }
         finally
         {
             Console.WriteLine("Finish");
+            Console.WriteLine($"Correct word is {winnerWord}");
         }
 
     }

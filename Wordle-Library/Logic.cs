@@ -27,7 +27,7 @@
             set { _word = value; }
         }
 
-        public List<char> ExistValue { get { return existValue; } }
+        public List<char> ExistValue { get { return existValue.Distinct().ToList(); } }
 
         public string ChooseRandomWord()
         {

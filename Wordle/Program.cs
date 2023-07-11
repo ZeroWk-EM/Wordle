@@ -53,7 +53,7 @@ namespace Wordle
                 winnerWord = game.ChooseRandomWord();
                 char[,] matrix = game.CreateGameMatrix();
                 int attempt = 0;
-                Console.WriteLine($"DEBUG - CORRECT WORD [{winnerWord}]");
+                //Console.WriteLine($"DEBUG - CORRECT WORD [{winnerWord}]");
                 Console.WriteLine($"\nWord have [{game.WordLength}] letter");
                 while (turn > 0)
                 {

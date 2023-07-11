@@ -64,7 +64,7 @@ namespace Wordle
                         attempt++;
                         Console.Clear();
                         PrintGameGrid(matrix, winnerWord.Length);
-
+                        // TODO: FIX THE BUG
                         if (game.ExistValue.Count > 0)
                         {
                             Console.Write("Value ");

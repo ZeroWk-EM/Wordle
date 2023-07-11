@@ -4,7 +4,7 @@ namespace Tic_Tac_Toe;
 
 internal class Program
 {
- 
+
     public static void PrintList(List<string> listToPrint)
     {
         foreach (string word in listToPrint)
@@ -27,7 +27,6 @@ internal class Program
                 else
                 {
                     Console.Write($"[{matrix[i, j]}]");
-
                 }
             }
             Console.WriteLine();
@@ -64,6 +63,16 @@ internal class Program
                     attempt++;
                     Console.Clear();
                     PrintGameGrid(matrix, winnerWord.Length);
+                    if (game.ExistValue.Count > 0)
+                    {
+                        Console.Write("Value ");
+                        foreach (char sentence in game.ExistValue)
+                        {
+                            Console.Write($"[\u001b[1;33m{sentence.ToString().ToUpper()}\u001b[1;0m]");
+
+                        }
+                        Console.WriteLine(" exist but the position is wrong");
+                    }
                     Console.WriteLine($"Word have [{game.WordLength}] letter");
                 }
                 else

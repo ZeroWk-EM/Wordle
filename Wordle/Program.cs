@@ -19,7 +19,16 @@ internal class Program
         {
             for (int j = 0; j < wordLength; j++)
             {
-                Console.Write($"[{matrix[i, j]}]");
+
+                if (matrix[i, j] != Logic.InitilizedMatrixSymbol && matrix[i, j] == Char.ToUpper(matrix[i, j]))
+                {
+                    Console.Write($"[\x1b[1;32m{matrix[i, j]}\x1b[1;0m]");
+                }
+                else
+                {
+                    Console.Write($"[{matrix[i, j]}]");
+
+                }
             }
             Console.WriteLine();
         }
@@ -44,17 +53,12 @@ internal class Program
                 string? toSend = Console.ReadLine();
                 if (toSend != null)
                 {
-                    Console.WriteLine($"BEFORE [{toSend}] LEN [{toSend.Length}]");
-                    // Remove space start/end, put all in lowercase and remove space beetwen word
                     toSend = toSend.Trim().ToLower().Replace(" ", "");
-                    Console.WriteLine($"AFTER [{toSend}] LEN [{toSend.Length}]");
                 }
 
                 if (toSend != null && toSend.Length == game.WordLength)
                 {
-                    Console.WriteLine($"BEFORE [{toSend}] LEN [{toSend.Length}]");
-                    toSend = toSend.Trim().ToLower();
-                    Console.WriteLine($"AFTER [{toSend}] LEN [{toSend.Length}]");
+                    Console.Clear();
                     game.InserIntoMatrix(attempt, toSend, matrix);
                     turn--;
                     attempt++;

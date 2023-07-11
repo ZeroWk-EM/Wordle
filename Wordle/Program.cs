@@ -38,6 +38,7 @@ namespace Wordle
             const string FilePath = @"C:\Users\EmanueleMoncada\Desktop\fakedb\wordTable.txt";
             int turn = Logic.MaxTurn;
             string winnerWord = "";
+            bool winning = false;
             try
             {
                 List<string> wordlist = File.ReadAllLines(FilePath).ToList();
@@ -74,10 +75,18 @@ namespace Wordle
                             }
                             Console.WriteLine(" exist but the position is wrong");
                         }
-                        Console.WriteLine($"Word have [{game.WordLength}] letter");
                         if (game.IsWinner(toSend))
                         {
                             turn = 0;
+                            winning = true;
+                        }
+                        else if (!game.IsWinner(toSend) && turn > 0)
+                        {
+                            Console.WriteLine($"Word have [{game.WordLength}] letter");
+                        }
+                        else
+                        {
+                            Console.WriteLine("End");
                         }
                     }
                     else
@@ -99,12 +108,7 @@ namespace Wordle
             {
                 Console.WriteLine(e.Message);
             }
-            finally
-            {
-                Console.WriteLine("Finish");
-                Console.WriteLine($"Correct word is {winnerWord}");
-            }
-
+            Console.WriteLine(winning ? "You Win" : $"I'm sorry but you lose!\nCorrect word is [{winnerWord}]");
         }
     }
 }

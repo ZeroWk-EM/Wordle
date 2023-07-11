@@ -6,28 +6,23 @@
         private int _wordLength = 0;
         private string _word = "";
         public const int MaxTurn = 6;
+        public const char InitilizedMatrixSymbol = '_';
 
         public Logic(List<string> word)
         {
             this._listword = word;
         }
-
         public List<string> Listword { get { return _listword; } }
-
         public int WordLength
         {
             get { return _wordLength; }
             set { _wordLength = value; }
         }
-
         private string Word
         {
             get { return _word; }
             set { _word = value; }
         }
-
-
-        // FUNCTION TO CHOOSE RANDOM WORD
         public string ChooseRandomWord()
         {
             Random roulette = new();
@@ -45,18 +40,16 @@
                 throw new Exception("Use the ChooseRandomWord() function first to set Matrix length");
             }
             char[,] matrix = new char[MaxTurn, WordLength];
-
-            // Initialize matrix
-
             for (int i = 0; i < Logic.MaxTurn; i++)
             {
                 for (int j = 0; j < WordLength; j++)
                 {
-                    matrix[i, j] = '_';
+                    matrix[i, j] = InitilizedMatrixSymbol;
                 }
             }
             return matrix;
         }
+
 
         public void InserIntoMatrix(int attempt, string recive, char[,] matrix)
         {
@@ -64,7 +57,14 @@
 
             for (int i = 0; i < WordLength; i++)
             {
-                matrix[attempt, i] = recivetochar[i];
+                if (recive[i] == Word[i])
+                {
+                    matrix[attempt, i] = Char.ToUpper(recivetochar[i]);
+                }
+                else
+                {
+                    matrix[attempt, i] = recivetochar[i];
+                }
             }
         }
     }

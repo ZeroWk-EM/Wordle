@@ -63,6 +63,7 @@ internal class Program
                     attempt++;
                     Console.Clear();
                     PrintGameGrid(matrix, winnerWord.Length);
+
                     if (game.ExistValue.Count > 0)
                     {
                         Console.Write("Value ");
@@ -74,6 +75,10 @@ internal class Program
                         Console.WriteLine(" exist but the position is wrong");
                     }
                     Console.WriteLine($"Word have [{game.WordLength}] letter");
+                    if (game.IsWinner(toSend))
+                    {
+                        turn = 0;
+                    }
                 }
                 else
                 {

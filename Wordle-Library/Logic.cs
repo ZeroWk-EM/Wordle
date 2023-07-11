@@ -2,12 +2,12 @@
 {
     public class Logic
     {
+        public const int MaxTurn = 6;
+        public const char InitilizedMatrixSymbol = '*';
         private readonly List<string> _listword = new();
+        private readonly List<char> existValue = new();
         private int _wordLength = 0;
         private string _word = "";
-        public const int MaxTurn = 6;
-        public const char InitilizedMatrixSymbol = '_';
-        readonly List<char> existValue = new();
 
         public Logic(List<string> word)
         {
@@ -56,6 +56,19 @@
             return matrix;
         }
 
+        public bool IsWinner(string word)
+        {
+            int counter = 0;
+
+            for (int i = 0; i < WordLength; i++)
+            {
+                if (word[i] == Word[i])
+                {
+                    counter++;
+                }
+            }
+            return counter == WordLength;
+        }
 
         public void InserIntoMatrix(int attempt, string recive, char[,] matrix)
         {

@@ -13,12 +13,13 @@
         {
             this._listword = word.ConvertAll(low => low.ToLower());
         }
-        public List<string> Listword { get { return _listword; } }
+
+        public List<string> Listword { get { return new List<string>(_listword); } }
 
         public int WordLength
         {
             get { return _wordLength; }
-            set { _wordLength = value; }
+            private set { _wordLength = value; }
         }
 
         private string Word

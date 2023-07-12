@@ -11,7 +11,7 @@
 
         public Logic(List<string> word)
         {
-            this._listword = word;
+            this._listword = word.ConvertAll(low => low.ToLower());
         }
         public List<string> Listword { get { return _listword; } }
 

@@ -31,7 +31,7 @@
 
         public string ChooseRandomWord()
         {
-            Random roulette = new();
+            Random roulette = new(DateTime.Now.Day);
             int randomNumber = roulette.Next(0, Listword.Count);
             string word = Listword[randomNumber];
             WordLength = word.Length;

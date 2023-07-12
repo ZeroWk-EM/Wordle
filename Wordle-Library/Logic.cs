@@ -59,8 +59,12 @@
 
         public bool IsWinner(string word)
         {
-            int counter = 0;
+            if (word == null)
+            {
+                throw new Exception("This value cannot be null");
+            }
 
+            int counter = 0;
             for (int i = 0; i < WordLength; i++)
             {
                 if (word[i] == Word[i])

@@ -28,7 +28,7 @@
             set { _word = value; }
         }
 
-        public List<char> ExistValue { get { return existValue.Distinct().ToList(); } }
+        public List<char> ExistValue { get { return new List<char>(existValue.Distinct().ToList()); } }
 
         public string ChooseRandomWord()
         {
@@ -40,62 +40,63 @@
             return Word;
         }
 
-        public char[,] CreateGameMatrix()
-        {
-            if (WordLength < 2)
-            {
-                throw new Exception("Use the ChooseRandomWord() function first to set Matrix length");
-            }
-            char[,] matrix = new char[MaxTurn, WordLength];
-            for (int i = 0; i < Logic.MaxTurn; i++)
-            {
-                for (int j = 0; j < WordLength; j++)
+        /*        public char[,] CreateGameMatrix()
                 {
-                    matrix[i, j] = InitilizedMatrixSymbol;
-                }
-            }
-            return matrix;
-        }
+                    if (WordLength < 2)
+                    {
+                        throw new Exception("Use the ChooseRandomWord() function first to set Matrix length");
+                    }
+                    char[,] matrix = new char[MaxTurn, WordLength];
+                    for (int i = 0; i < Logic.MaxTurn; i++)
+                    {
+                        for (int j = 0; j < WordLength; j++)
+                        {
+                            matrix[i, j] = InitilizedMatrixSymbol;
+                        }
+                    }
+                    return matrix;
+                }*/
 
-        public bool IsWinner(string word)
-        {
-            if (word == null)
-            {
-                throw new Exception("This value cannot be null");
-            }
+        /*      public bool IsWinner(string word)
+              {
+                  if (word == null)
+                  {
+                      throw new Exception("This value cannot be null");
+                  }
 
-            int counter = 0;
-            for (int i = 0; i < WordLength; i++)
-            {
-                if (word[i] == Word[i])
-                {
-                    counter++;
-                }
-            }
-            return counter == WordLength;
-        }
+                  int counter = 0;
+                  for (int i = 0; i < WordLength; i++)
+                  {
+                      if (word[i] == Word[i])
+                      {
+                          counter++;
+                      }
+                  }
+                  return counter == WordLength;
+              }*/
 
-        public void InserIntoMatrix(int attempt, string recive, char[,] matrix)
-        {
-            char[] recivetochar = recive.ToCharArray();
-            existValue.Clear();
+        /*        public void InserIntoMatrix(int attempt, string recive, char[,] matrix)
+                {
+                    char[] recivetochar = recive.ToCharArray();
+                    existValue.Clear();
 
-            for (int i = 0; i < WordLength; i++)
-            {
-                if (recive[i] == Word[i])
-                {
-                    matrix[attempt, i] = Char.ToUpper(recivetochar[i]);
+                    for (int i = 0; i < WordLength; i++)
+                    {
+                        if (recive[i] == Word[i])
+                        {
+                            matrix[attempt, i] = Char.ToUpper(recivetochar[i]);
+                        }
+                        else if (Word.Contains(recivetochar[i]))
+                        {
+                            matrix[attempt, i] = recivetochar[i];
+                            existValue.Add(recivetochar[i]);
+                        }
+                        else
+                        {
+                            matrix[attempt, i] = recivetochar[i];
+                        }
+                    }
                 }
-                else if (Word.Contains(recivetochar[i]))
-                {
-                    matrix[attempt, i] = recivetochar[i];
-                    existValue.Add(recivetochar[i]);
-                }
-                else
-                {
-                    matrix[attempt, i] = recivetochar[i];
-                }
-            }
-        }
+        */
     }
 }

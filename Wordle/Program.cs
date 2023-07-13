@@ -4,34 +4,19 @@ namespace Wordle
 {
     internal class Program
     {
-
+        // DEBUG FUNCTION
         public static void PrintList(List<string> listToPrint)
         {
+            Console.WriteLine($"Grandezza Lista - [{listToPrint.Count}]");
             foreach (string word in listToPrint)
             {
                 Console.WriteLine(word);
             }
         }
 
-        public static void PrintGameGrid(char[,] matrix, int wordLength)
-        {
-            Console.WriteLine("\x1b[1m\u001b[1;32mWO\u001b[1;31mRD\u001b[1;33mLE\u001b[1;0m\n");
-            for (int i = 0; i < Logic.MaxTurn; i++)
-            {
-                for (int j = 0; j < wordLength; j++)
-                {
-
-                    if (matrix[i, j] != Logic.InitilizedMatrixSymbol && matrix[i, j] == Char.ToUpper(matrix[i, j]))
-                    {
-                        Console.Write($"[\x1b[1;32m{matrix[i, j]}\x1b[1;0m]");
-                    }
-                    else
-                    {
-                        Console.Write($"[{matrix[i, j]}]");
-                    }
-                }
-                Console.WriteLine();
-            }
+       // PRINT GAME BOARD
+       public static void PrintGameBoard() {
+            
         }
 
         static public void Main()
@@ -44,6 +29,7 @@ namespace Wordle
             try
             {
                 List<string> wordlist = File.ReadAllLines(FilePath).ToList();
+
                 if (wordlist.Count == 0)
                 {
                     Console.WriteLine("\u001b[1;31mError - The Collection is empty\x1b[1;0m");
@@ -51,9 +37,6 @@ namespace Wordle
                 }
                 Logic game = new(wordlist);
                 winnerWord = game.ChooseRandomWord();
-                // char[,] matrix = game.CreateGameMatrix();
-                int attempt = 0;
-                //Console.WriteLine($"DEBUG - CORRECT WORD [{winnerWord}]");
                 Console.WriteLine($"\nWord have [{game.WordLength}] letter");
                 while (turn > 0)
                 {
@@ -61,45 +44,30 @@ namespace Wordle
                     string? toSend = Console.ReadLine();
                     if (toSend != null)
                     {
+                        // SANIFICATE INPUT
                         toSend = toSend.Trim().ToLower().Replace(" ", "");
-                    }
-
-                    if (toSend != null && toSend.Length == game.WordLength)
-                    {
-                        // game.InserIntoMatrix(attempt, toSend, matrix);
-                        turn--;
-                        attempt++;
-                        Console.Clear();
-                        // PrintGameGrid(matrix, winnerWord.Length);
-                        // TODO: FIX THE BUG
-                        if (game.ExistValue.Count > 0)
+                        if (toSend.Length == game.WordLength)
                         {
-                            Console.Write("\nValue ");
-                            foreach (char sentence in game.ExistValue)
+                            game.InsertWord(toSend);
+                            turn--;
+                            PrintList(game.GameBoard);
+                            // IF CHECK EXIST BUT NOT POSITION
+                            if (game.ExistValue.Count > 0)
                             {
-                                Console.Write($"[\u001b[1;33m{sentence.ToString().ToUpper()}\u001b[1;0m]");
+                                Console.Write("\nValue ");
+                                foreach (char sentence in game.ExistValue)
+                                {
+                                    Console.Write($"[\u001b[1;33m{sentence.ToString().ToUpper()}\u001b[1;0m]");
 
-                            }
-                            Console.WriteLine(" exist but the position is wrong");
+                                }
+                                Console.WriteLine(" exist but the position is wrong");
+                            }          
                         }
-                        /*     if (game.IsWinner(toSend))
-                             {
-                                 turn = 0;
-                                 winning = true;
-                             }
-                             else if (!game.IsWinner(toSend) && turn > 0)
-                             {
-                                 Console.WriteLine($"\nWord have [{game.WordLength}] letter");
-                             }*/
-                    }
-                    else
-                    {
-                        if (toSend != null)
+                        else
                         {
                             Console.Write($"\u001b[1;31mLength Error - The word entered is too ");
                             Console.WriteLine(toSend.Length > winnerWord.Length ? "Long\u001b[1;0m" : "Short\u001b[1;0m");
                         }
-
                     }
                 };
             }

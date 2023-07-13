@@ -13,9 +13,9 @@
 
 - [X] Utilizzare le collection.
 - [X] Mantenere divisa la Business Logic con il Main.
-- [ ] Manipolare correttamente le stringhe.
+- [X] Manipolare correttamente le stringhe.
 - [X] Validare la lista in ingresso settandola in lowercase.
 - [X] Aggiungere qualcosa che randomizzi il seed del random.
-- [ ] Utilizzare le lista anzichè la matrice di caratteri.
+- [X] Utilizzare le lista anzichè la matrice di caratteri.
 - [X] Resistuire delle copie e mai le versioni originali.
-- [ ] Fare un check sui parametri d'ingresso delle funzioni.
+- [X] Fare un check sui parametri d'ingresso delle funzioni.

@@ -55,6 +55,15 @@
             return Word;
         }
 
+        public bool IsWinner(string word)
+        {
+            foreach (string s in Listword)
+            {
+                if (s == word) return true;
+            }
+            return false;
+        }
+
         public void InsertWord(string wordToInsert)
         {
             string toAdd = "";

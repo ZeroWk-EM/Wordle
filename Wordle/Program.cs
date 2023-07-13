@@ -7,18 +7,11 @@ namespace Wordle
         // DEBUG FUNCTION
         public static void PrintList(List<string> listToPrint)
         {
-            Console.WriteLine($"Grandezza Lista - [{listToPrint.Count}]");
             foreach (string word in listToPrint)
             {
                 Console.WriteLine(word);
             }
         }
-
-       // PRINT GAME BOARD
-       public static void PrintGameBoard() {
-            
-        }
-
         static public void Main()
         {
             Console.Title = "Wordle Game";
@@ -37,7 +30,8 @@ namespace Wordle
                 }
                 Logic game = new(wordlist);
                 winnerWord = game.ChooseRandomWord();
-                Console.WriteLine($"\nWord have [{game.WordLength}] letter");
+                Console.WriteLine(winnerWord);
+                Console.WriteLine($"Word have [{game.WordLength}] letter");
                 while (turn > 0)
                 {
                     Console.Write("Insert phrase: ");
@@ -50,23 +44,29 @@ namespace Wordle
                         {
                             game.InsertWord(toSend);
                             turn--;
+                            Console.Clear();
                             PrintList(game.GameBoard);
                             // IF CHECK EXIST BUT NOT POSITION
                             if (game.ExistValue.Count > 0)
                             {
-                                Console.Write("\nValue ");
+                                Console.Write("Value ");
                                 foreach (char sentence in game.ExistValue)
                                 {
                                     Console.Write($"[\u001b[1;33m{sentence.ToString().ToUpper()}\u001b[1;0m]");
 
                                 }
                                 Console.WriteLine(" exist but the position is wrong");
-                            }          
+                            }
                         }
                         else
                         {
                             Console.Write($"\u001b[1;31mLength Error - The word entered is too ");
                             Console.WriteLine(toSend.Length > winnerWord.Length ? "Long\u001b[1;0m" : "Short\u001b[1;0m");
+                        }
+                        if (game.IsWinner(toSend))
+                        {
+                            turn = 0;
+                            winning = true;
                         }
                     }
                 };

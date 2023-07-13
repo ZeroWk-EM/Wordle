@@ -51,7 +51,7 @@ namespace Wordle
                 }
                 Logic game = new(wordlist);
                 winnerWord = game.ChooseRandomWord();
-                char[,] matrix = game.CreateGameMatrix();
+                // char[,] matrix = game.CreateGameMatrix();
                 int attempt = 0;
                 //Console.WriteLine($"DEBUG - CORRECT WORD [{winnerWord}]");
                 Console.WriteLine($"\nWord have [{game.WordLength}] letter");
@@ -66,11 +66,11 @@ namespace Wordle
 
                     if (toSend != null && toSend.Length == game.WordLength)
                     {
-                        game.InserIntoMatrix(attempt, toSend, matrix);
+                        // game.InserIntoMatrix(attempt, toSend, matrix);
                         turn--;
                         attempt++;
                         Console.Clear();
-                        PrintGameGrid(matrix, winnerWord.Length);
+                        // PrintGameGrid(matrix, winnerWord.Length);
                         // TODO: FIX THE BUG
                         if (game.ExistValue.Count > 0)
                         {
@@ -82,15 +82,15 @@ namespace Wordle
                             }
                             Console.WriteLine(" exist but the position is wrong");
                         }
-                        if (game.IsWinner(toSend))
-                        {
-                            turn = 0;
-                            winning = true;
-                        }
-                        else if (!game.IsWinner(toSend) && turn > 0)
-                        {
-                            Console.WriteLine($"\nWord have [{game.WordLength}] letter");
-                        }
+                        /*     if (game.IsWinner(toSend))
+                             {
+                                 turn = 0;
+                                 winning = true;
+                             }
+                             else if (!game.IsWinner(toSend) && turn > 0)
+                             {
+                                 Console.WriteLine($"\nWord have [{game.WordLength}] letter");
+                             }*/
                     }
                     else
                     {

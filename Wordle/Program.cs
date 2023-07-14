@@ -4,7 +4,6 @@ namespace Wordle
 {
     internal class Program
     {
-        // DEBUG FUNCTION
         public static void PrintGameBoard(List<string> listToPrint)
         {
             Console.WriteLine("\x1b[1m\u001b[1;32mWO\u001b[1;31mRD\u001b[1;33mLE\u001b[1;0m\n");
@@ -52,7 +51,6 @@ namespace Wordle
                     string? toSend = Console.ReadLine();
                     if (toSend != null)
                     {
-                        // SANIFICATE INPUT
                         toSend = toSend.Trim().ToLower().Replace(" ", "");
                         if (toSend.Length == game.WordLength)
                         {
@@ -60,7 +58,6 @@ namespace Wordle
                             turn--;
                             Console.Clear();
                             PrintGameBoard(game.GameBoard);
-                            // IF CHECK EXIST BUT NOT POSITION
                             if (game.ExistValue.Count > 0)
                             {
                                 Console.Write("Value ");

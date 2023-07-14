@@ -5,7 +5,7 @@ namespace Wordle
     internal class Program
     {
         // DEBUG FUNCTION
-        public static void PrintList(List<string> listToPrint)
+        public static void PrintGameBoard(List<string> listToPrint)
         {
             Console.WriteLine("\x1b[1m\u001b[1;32mWO\u001b[1;31mRD\u001b[1;33mLE\u001b[1;0m\n");
 
@@ -13,7 +13,7 @@ namespace Wordle
             {
                 for (int i = 0; i < word.Length; i++)
                 {
-                    if (word[i]== Char.ToUpper(word[i]))
+                    if (word[i] == Char.ToUpper(word[i]))
                     {
                         Console.Write($"[\x1b[1;32m{word[i]}\x1b[1;0m]");
                     }
@@ -21,7 +21,7 @@ namespace Wordle
                     {
                         Console.Write($"[{word[i]}]");
                     }
-                    
+
                 }
                 Console.WriteLine();
             }
@@ -59,7 +59,7 @@ namespace Wordle
                             game.InsertWord(toSend);
                             turn--;
                             Console.Clear();
-                            PrintList(game.GameBoard);
+                            PrintGameBoard(game.GameBoard);
                             // IF CHECK EXIST BUT NOT POSITION
                             if (game.ExistValue.Count > 0)
                             {

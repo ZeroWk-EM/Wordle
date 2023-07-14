@@ -23,6 +23,22 @@
             }
         }
 
+        public List<char> ExistValue
+        {
+            get
+            {
+                return new List<char>(_existValue.Distinct().ToList());
+            }
+        }
+
+        public List<string> GameBoard
+        {
+            get
+            {
+                return new List<string>(_gameBoard);
+            }
+        }
+
         public int WordLength
         {
             get { return _wordLength; }
@@ -33,16 +49,6 @@
         {
             get { return _word; }
             private set { _word = value; }
-        }
-
-        public List<char> ExistValue { get { return new List<char>(_existValue.Distinct().ToList()); } }
-
-        public List<string> GameBoard
-        {
-            get
-            {
-                return new List<string>(_gameBoard);
-            }
         }
 
         public string ChooseRandomWord()

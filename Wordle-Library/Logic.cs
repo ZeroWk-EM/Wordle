@@ -63,6 +63,11 @@
 
         public bool IsWinner(string word)
         {
+            if (word == null)
+            {
+                throw new Exception("Word has not nullable");
+            };
+
             foreach (string s in Listword)
             {
                 if (s == word) return true;

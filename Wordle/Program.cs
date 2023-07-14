@@ -7,9 +7,23 @@ namespace Wordle
         // DEBUG FUNCTION
         public static void PrintList(List<string> listToPrint)
         {
+            Console.WriteLine("\x1b[1m\u001b[1;32mWO\u001b[1;31mRD\u001b[1;33mLE\u001b[1;0m\n");
+
             foreach (string word in listToPrint)
             {
-                Console.WriteLine(word);
+                for (int i = 0; i < word.Length; i++)
+                {
+                    if (word[i]== Char.ToUpper(word[i]))
+                    {
+                        Console.Write($"[\x1b[1;32m{word[i]}\x1b[1;0m]");
+                    }
+                    else
+                    {
+                        Console.Write($"[{word[i]}]");
+                    }
+                    
+                }
+                Console.WriteLine();
             }
         }
         static public void Main()

@@ -5,33 +5,55 @@
         public const int MaxTurn = 6;
         public const char InitilizedMatrixSymbol = '*';
         private readonly List<string> _listword = new();
-        private readonly List<char> existValue = new();
+        private readonly List<char> _existValue = new();
+        private readonly List<string> _gameBoard = new();
         private int _wordLength = 0;
         private string _word = "";
 
         public Logic(List<string> word)
         {
-            this._listword = word.ConvertAll(low => low.ToLower());
+            this._listword = word.ConvertAll(low => low.ToLower().Trim());
         }
-        public List<string> Listword { get { return _listword; } }
+
+        public List<string> Listword
+        {
+            get
+            {
+                return new List<string>(_listword);
+            }
+        }
+
+        public List<char> ExistValue
+        {
+            get
+            {
+                return new List<char>(_existValue.Distinct().ToList());
+            }
+        }
+
+        public List<string> GameBoard
+        {
+            get
+            {
+                return new List<string>(_gameBoard);
+            }
+        }
 
         public int WordLength
         {
             get { return _wordLength; }
-            set { _wordLength = value; }
+            private set { _wordLength = value; }
         }
 
-        private string Word
+        public string Word
         {
             get { return _word; }
-            set { _word = value; }
+            private set { _word = value; }
         }
-
-        public List<char> ExistValue { get { return existValue.Distinct().ToList(); } }
 
         public string ChooseRandomWord()
         {
-            Random roulette = new();
+            Random roulette = new(Environment.TickCount);
             int randomNumber = roulette.Next(0, Listword.Count);
             string word = Listword[randomNumber];
             WordLength = word.Length;
@@ -39,58 +61,47 @@
             return Word;
         }
 
-        public char[,] CreateGameMatrix()
-        {
-            if (WordLength < 2)
-            {
-                throw new Exception("Use the ChooseRandomWord() function first to set Matrix length");
-            }
-            char[,] matrix = new char[MaxTurn, WordLength];
-            for (int i = 0; i < Logic.MaxTurn; i++)
-            {
-                for (int j = 0; j < WordLength; j++)
-                {
-                    matrix[i, j] = InitilizedMatrixSymbol;
-                }
-            }
-            return matrix;
-        }
-
         public bool IsWinner(string word)
         {
-            int counter = 0;
-
-            for (int i = 0; i < WordLength; i++)
+            if (word == null)
             {
-                if (word[i] == Word[i])
-                {
-                    counter++;
-                }
+                throw new Exception("Word has not nullable");
+            };
+
+            foreach (string s in Listword)
+            {
+                if (s == word) return true;
             }
-            return counter == WordLength;
+            return false;
         }
 
-        public void InserIntoMatrix(int attempt, string recive, char[,] matrix)
+        public void InsertWord(string wordToInsert)
         {
-            char[] recivetochar = recive.ToCharArray();
-            existValue.Clear();
+            string toAdd = "";
+            _existValue.Clear();
+            // Validate input parms
+            if (wordToInsert.Length != WordLength)
+            {
+                throw new ArgumentException("The word you entered is bigger or lower than the winning word");
+            }
 
             for (int i = 0; i < WordLength; i++)
             {
-                if (recive[i] == Word[i])
+                if (wordToInsert[i] == Word[i])
                 {
-                    matrix[attempt, i] = Char.ToUpper(recivetochar[i]);
+                    toAdd += Char.ToUpper(wordToInsert[i]);
                 }
-                else if (Word.Contains(recivetochar[i]))
+                else if (Word.Contains(wordToInsert[i]))
                 {
-                    matrix[attempt, i] = recivetochar[i];
-                    existValue.Add(recivetochar[i]);
+                    toAdd += wordToInsert[i];
+                    _existValue.Add(wordToInsert[i]);
                 }
                 else
                 {
-                    matrix[attempt, i] = recivetochar[i];
+                    toAdd += wordToInsert[i];
                 }
             }
+            _gameBoard.Add(toAdd);
         }
     }
 }

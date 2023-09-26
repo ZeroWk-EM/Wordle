@@ -7,28 +7,11 @@ namespace Wordle
     internal class Program
     {
         private static readonly Logger logger = LogManager.GetCurrentClassLogger();
-
         public static void PrintGameBoard(List<string> listToPrint)
         {
-            Console.WriteLine("\x1b[1m\u001b[1;32mWO\u001b[1;31mRD\u001b[1;33mLE\u001b[1;0m\n");
 
-            foreach (string word in listToPrint)
-            {
-                for (int i = 0; i < word.Length; i++)
-                {
-                    if (word[i] == Char.ToUpper(word[i]))
-                    {
-                        Console.Write($"[\x1b[1;32m{word[i]}\x1b[1;0m]");
-                    }
-                    else
-                    {
-                        Console.Write($"[{word[i]}]");
-                    }
-
-                }
-                Console.WriteLine();
-            }
         }
+
         static public void Main()
         {
             Console.Title = "Wordle Game";
@@ -38,7 +21,6 @@ namespace Wordle
             bool winning = false;
             if (path != null)
             {
-
                 try
                 {
                     List<string> wordlist = File.ReadAllLines(path).ToList();
@@ -60,33 +42,7 @@ namespace Wordle
                         if (toSend != null)
                         {
                             toSend = toSend.Trim().ToLower().Replace(" ", "");
-                            if (toSend.Length == game.WordLength)
-                            {
-                                game.InsertWord(toSend);
-                                turn--;
-                                Console.Clear();
-                                PrintGameBoard(game.GameBoard);
-                                if (game.ExistValue.Count > 0)
-                                {
-                                    Console.Write("Value ");
-                                    foreach (char sentence in game.ExistValue)
-                                    {
-                                        Console.Write($"[\u001b[1;33m{sentence.ToString().ToUpper()}\u001b[1;0m]");
-
-                                    }
-                                    Console.WriteLine(" exist but the position is wrong");
-                                }
-                            }
-                            else
-                            {
-                                Console.Write($"\u001b[1;31mLength Error - The word entered is too ");
-                                Console.WriteLine(toSend.Length > winnerWord.Length ? "Long\u001b[1;0m" : "Short\u001b[1;0m");
-                            }
-                            if (game.IsWinner(toSend))
-                            {
-                                turn = 0;
-                                winning = true;
-                            }
+                            game.TryAttempt(toSend);
                         }
                     };
                     Console.WriteLine(winning ? "\n\u001b[1;32mYou Win\u001b[1;0m" : $"\n\u001b[1;31mI'm sorry but you lose!\nCorrect word is \u001b[1;0m\u001b[1;96m{winnerWord}\u001b[1;0m");

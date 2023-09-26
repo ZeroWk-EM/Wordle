@@ -5,8 +5,9 @@
         public const int MaxTurn = 6;
         public const char InitilizedMatrixSymbol = '*';
         private readonly List<string> _listword = new();
-        private readonly List<char> _existValue = new();
         private readonly List<string> _gameBoard = new();
+
+
         private int _wordLength = 0;
         private string _word = "";
 
@@ -20,22 +21,6 @@
             get
             {
                 return new List<string>(_listword);
-            }
-        }
-
-        public List<char> ExistValue
-        {
-            get
-            {
-                return new List<char>(_existValue.Distinct().ToList());
-            }
-        }
-
-        public List<string> GameBoard
-        {
-            get
-            {
-                return new List<string>(_gameBoard);
             }
         }
 
@@ -75,33 +60,18 @@
             return false;
         }
 
-        public void InsertWord(string wordToInsert)
+        //
+        public void TryAttempt(string wordToInsert)
         {
-            string toAdd = "";
-            _existValue.Clear();
-            // Validate input parms
+            // Aggiungere NullArgumentExpetion
+
             if (wordToInsert.Length != WordLength)
             {
                 throw new ArgumentException("The word you entered is bigger or lower than the winning word");
-            }
-
-            for (int i = 0; i < WordLength; i++)
-            {
-                if (wordToInsert[i] == Word[i])
-                {
-                    toAdd += Char.ToUpper(wordToInsert[i]);
-                }
-                else if (Word.Contains(wordToInsert[i]))
-                {
-                    toAdd += wordToInsert[i];
-                    _existValue.Add(wordToInsert[i]);
-                }
-                else
-                {
-                    toAdd += wordToInsert[i];
-                }
-            }
-            _gameBoard.Add(toAdd);
+            }// aggiungere alla lista
+            Attempt attempt = new Attempt(wordToInsert);
+            //usare verify
+            attempt.InsertWord(Word);
         }
     }
 }

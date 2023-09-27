@@ -5,7 +5,7 @@
         public const int MaxTurn = 6;
         public const char InitilizedMatrixSymbol = '*';
         private readonly List<string> _listword = new();
-        private readonly List<string> _gameBoard = new();
+        private readonly List<Attempt> _gameBoard = new();
 
 
         private int _wordLength = 0;
@@ -36,6 +36,14 @@
             private set { _word = value; }
         }
 
+        public List<Attempt> GameBoard
+        {
+            get
+            {
+                return new List<Attempt>(_gameBoard);
+            }
+        }
+
         public string ChooseRandomWord()
         {
             Random roulette = new(Environment.TickCount);
@@ -60,18 +68,19 @@
             return false;
         }
 
-        //
-        public void TryAttempt(string wordToInsert)
+        public void VerifyPosition(string wordToInsert)
         {
-            // Aggiungere NullArgumentExpetion
-
+            if (wordToInsert == null)
+            {
+                throw new ArgumentNullException("Value cannot be null");
+            }
             if (wordToInsert.Length != WordLength)
             {
                 throw new ArgumentException("The word you entered is bigger or lower than the winning word");
-            }// aggiungere alla lista
+            }
             Attempt attempt = new Attempt(wordToInsert);
-            //usare verify
-            attempt.InsertWord(Word);
+            attempt.VerifyPosition(Word);
+            _gameBoard.Add(attempt);
         }
     }
 }

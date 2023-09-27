@@ -35,7 +35,7 @@ namespace Wordle_Library
 
 
         //Cambia nome
-        public void InsertWord(string correctWord)
+        public void VerifyPosition(string correctWord)
         {
             for (int i = 0; i < correctWord.Length; i++)
             {

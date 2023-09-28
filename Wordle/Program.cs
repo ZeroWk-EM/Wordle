@@ -20,17 +20,15 @@ namespace Wordle
                     {
                         case Position.Ok:
                             Console.Write($"[\x1b[1;32m{word.Word[i]}\x1b[1;0m]");
-                            i++;
                             break;
                         case Position.Wrong:
                             Console.Write($"[\x1b[1;33m{word.Word[i]}\x1b[1;0m]");
-                            i++;
                             break;
                         case Position.Missing:
                             Console.Write($"[\x1b[1;31m{word.Word[i]}\x1b[1;0m]");
-                            i++;
                             break;
                     }
+                    i++;
                 }
                 Console.WriteLine();
             }

@@ -32,9 +32,7 @@ namespace Wordle_Library
                 return _positions;
             }
         }
-
-
-        //Cambia nome
+ 
         public void VerifyPosition(string correctWord)
         {
             for (int i = 0; i < correctWord.Length; i++)

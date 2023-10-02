@@ -61,11 +61,7 @@
                 throw new Exception("Word has not nullable");
             };
 
-            foreach (string s in Listword)
-            {
-                if (s == word) return true;
-            }
-            return false;
+            return word == _word;
         }
 
         public void VerifyPosition(string wordToInsert)

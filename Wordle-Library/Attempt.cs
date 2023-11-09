@@ -32,25 +32,29 @@ namespace Wordle_Library
                 return _positions;
             }
         }
- 
+
         public void VerifyPosition(string correctWord)
         {
             for (int i = 0; i < correctWord.Length; i++)
             {
                 if (Word[i] == correctWord[i])
                 {
-                    _positions.Add(Enum.Position.Ok);
-                }
-                else if (correctWord.Contains(Word[i]))
-                {
-                    _positions.Add(Enum.Position.Wrong);
-                }
+                    _positions.Add(Position.Ok);
+                    correctWord = correctWord.Replace(Word[i], ' ');
+                 }
                 else
                 {
-                    _positions.Add(Enum.Position.Missing);
+                    _positions.Add(Position.Missing);
+                }
+            }
+
+            for (int i = 0; i < correctWord.Length; i++)
+            {
+                if (_positions[i] != Position.Ok && correctWord.Contains(Word[i]))
+                {
+                    _positions[i] = Position.Wrong;
                 }
             }
         }
-
     }
 }
